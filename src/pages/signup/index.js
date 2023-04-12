@@ -1,19 +1,30 @@
 import { useState } from 'react'
-import styles from './Login.module.css'
+import styles from './Signup.module.css'
 
-export default function Login() {
+export default function Signup() {
+    const[name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
+
     const handleSubmit = (e) => {
       e.preventDefault()
-      console.log(email, password)
+      console.log(name, email, password)
     }
 
     return (
-      <form onSubmit = {handleSubmit} className={styles['login-form']}>
+      <form onSubmit = {handleSubmit} className={styles['signup-form']}>
 
-        <h2>Login</h2>
+        <h2>Signup</h2>
+
+        <label> 
+          <span>name:</span>
+          <input
+            type='text'
+            onChange={(e) => setName(e.target.value)} 
+            value={name}
+          />
+        </label>
+
         <label> 
           <span>email:</span>
           <input
@@ -32,7 +43,7 @@ export default function Login() {
           />
         </label>
         <button className='btn'>
-          Login
+          Signup
         </button>      
       </form>
     )
