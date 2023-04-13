@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useAuthContext } from '../hooks/useAuthContext'; 
+import HomePage from '../pages/home/Home'
 
 export default function Home() {
   const router = useRouter()
@@ -16,7 +17,7 @@ export default function Home() {
   return (
     <>
     {user && (
-      <h1>Home page</h1>
+      <HomePage/>
       )}
     </>
   )

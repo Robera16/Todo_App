@@ -17,6 +17,7 @@ export default function Login() {
       router.replace('/');
       return null;
     }
+    
     const handleSubmit = async(e) => {
       e.preventDefault()
       await login(email, password)
