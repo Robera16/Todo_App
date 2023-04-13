@@ -1,13 +1,23 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import { Inter } from 'next/font/google'
-// import styles from '@/styles/Home.module.css'
-// const inter = Inter({ subsets: ['latin'] })
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useAuthContext } from '../hooks/useAuthContext'; 
 
 export default function Home() {
+  const router = useRouter()
+  const { authIsReady, user } = useAuthContext()
+  
+  useEffect(() => {
+    // redirect to login page if user is not logged in
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
+
   return (
     <>
-      <h1> HomePage</h1>
+    {user && (
+      <h1>Home page</h1>
+      )}
     </>
   )
 }

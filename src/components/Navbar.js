@@ -1,8 +1,13 @@
 import Link from "next/link"
+import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
+
 import styles from './Navbar.module.css'
 
 export default function Home() {
-    const {user} = 'userA'
+    const { logout } = useLogout()
+    const { user } = useAuthContext()
+
     return (
         <nav className={styles.navbar}>
         <ul >
@@ -25,7 +30,7 @@ export default function Home() {
 
             {user && (
               <>
-                <li>hello, {user}</li>
+                <li>hello, {user.displayName}</li>
                 <li>
                   <button className='btn' onClick={logout}>Logout</button>
                 </li>

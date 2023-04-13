@@ -1,19 +1,39 @@
 import { useState } from 'react'
 import styles from './Signup.module.css'
+import { useRouter } from 'next/router';
 import { useSignup } from '../../hooks/useSignup'
+import { useAuthContext } from '../../hooks/useAuthContext'; 
 
 export default function Signup() {
     const[name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const router = useRouter();
+    const { user } = useAuthContext()
+
     const { signup, isPending, error } = useSignup()
 
-    const handleSubmit = (e) => {
+
+    if (user) {
+      router.replace('/');
+      return null;
+    }
+
+    const handleSubmit = async(e) => {
       e.preventDefault()
-      signup(name, email, password)
+      try{
+        await signup(name, email, password)
+        router.push('/');
+      }
+      catch (error) {
+          console.log(error);
+        }
     }
 
     return (
+      <>
+      {!user && (
+        <>
       <form onSubmit = {handleSubmit} className={styles['signup-form']}>
 
         <h2>Signup</h2>
@@ -48,5 +68,8 @@ export default function Signup() {
         {isPending && <button className='btn' disabled>loading</button>}
         { error && <p>{error}</p>}     
       </form>
+      </>
+      )}
+      </>
     )
   }
