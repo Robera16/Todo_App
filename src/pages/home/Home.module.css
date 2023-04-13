@@ -55,7 +55,7 @@
   }
 
   /* todos */
-.transactions li {
+.todos li {
   margin: 30px auto;
   border: 1px solid #f2f2f2;
   box-shadow: 3px 3px 5px rgba(50,50,50,0.1);
@@ -66,18 +66,18 @@
   overflow: hidden;
   border-left: 4px solid #1f9751;
 }
-.transactions .name {
+.todos .title {
   color: #777;
   font-size: 1.4em;
 }
-.transactions .amount {
+.todos .description {
   margin-left: auto;
   margin-right: 40px;
   color: #777;
   font-weight: bold;
   font-size: 1.6em;
 }
-.transactions button {
+.todos button {
   position: absolute;
   top: 0;
   right:0;

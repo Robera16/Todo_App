@@ -1,15 +1,23 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useFirestore } from "@/hooks/useFirestore"
 
-export default function TodoForm(){
+export default function TodoForm({uid}){
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const { addDocument , response } = useFirestore('todos') 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({
-            title, description
-        })
+        addDocument({ 
+            uid,
+            title,  
+            description
+          })
+        
+        setTitle('')
+        setDescription('')
     }
+
     return (
         <>
             <h3>Add a Todo</h3>
