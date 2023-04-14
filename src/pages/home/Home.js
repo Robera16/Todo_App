@@ -17,10 +17,10 @@ export default function Home(){
         <div className={styles.container}>
             <div className={styles.content}>
             {error && <p>{error}</p>}
-            {documents && <TodoList/>}
+            {documents && <TodoList todos={documents}/>}
             </div>
             <div className={styles.sidebar}>
-                <TodoForm/>
+                <TodoForm uid={user.uid}/>
             </div>
         </div>
     )

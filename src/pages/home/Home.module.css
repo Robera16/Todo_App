@@ -70,11 +70,11 @@
   color: #777;
   font-size: 1.4em;
 }
-.todos .description {
+.todos .date {
   margin-left: auto;
   margin-right: 40px;
   color: #777;
-  font-size: 1.4em;
+  font-size: 1em;
 }
 .todos button {
   position: absolute;

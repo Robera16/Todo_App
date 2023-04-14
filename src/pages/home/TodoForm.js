@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react"
 import { useFirestore } from "@/hooks/useFirestore"
-import { useAuthContext } from '../../hooks/useAuthContext'
 
-export default function TodoForm(){
-    const {user} = useAuthContext()
-    const uid=user.uid
+export default function TodoForm({uid}){
     const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
+    const [date, setDate] = useState("");
     const { addDocument , response } = useFirestore('todos') 
 
     const handleSubmit = (e) => {
@@ -14,11 +11,11 @@ export default function TodoForm(){
         addDocument({ 
             uid,
             title,  
-            description
+            date
           })
         
         setTitle('')
-        setDescription('')
+        setDate('')
     }
 
     return (
@@ -35,12 +32,12 @@ export default function TodoForm(){
                     />
                 </label>
                 <label>
-                    <span>Description:</span>
-                    <textarea
-                        type = 'text'
+                    <span>Date:</span>
+                    <input
+                        type="date"
                         required
-                        onChange={(e) => setDescription(e.target.value)}
-                        value={description}
+                        onChange={(e) => setDate(e.target.value)}
+                        value={date}
                     />
                 </label>
                 <button>Add Todo</button>
