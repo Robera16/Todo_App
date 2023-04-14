@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
 import { useFirestore } from "@/hooks/useFirestore"
+import { useAuthContext } from '../../hooks/useAuthContext'
 
-export default function TodoForm({uid}){
+export default function TodoForm(){
+    const {user} = useAuthContext()
+    const uid=user.uid
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const { addDocument , response } = useFirestore('todos') 

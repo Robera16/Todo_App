@@ -1,19 +1,36 @@
 import { useFirestore } from '../../hooks/useFirestore'
 import styles from './Home.module.css'
+import { useAuthContext } from '../../hooks/useAuthContext'
+import { useCollection  } from '../../hooks/useCollection'
 
-export default function TodoList({ todos }) {
+export default function TodoList() {
+
+    const {user} = useAuthContext()
+    const {documents, error} = useCollection(
+        'todos',
+        ['uid', '==', user.uid],
+        ["createdAt", "desc"]
+     )
+
     const {deleteDocument, response } = useFirestore('todos')
-
-    console.log(response)
     return (
     <ul className={styles.todos}>
-        {todos.map((todo) => (
+         {documents && (
+              <>
+        {documents.map((todo) => (
             <li key={todo.id}>
                 <p className={styles.title}>{todo.title}</p>
-                <p className={styles.description}>${todo.description}</p>
+                <p className={styles.description}>{todo.description}</p>
                 <button onClick={() => deleteDocument(todo.id)}>X</button>
             </li>
         ))}
+        </>)}
+
+        {!documents && (
+              <>
+                <p>Loading...</p> 
+              </>)}
+
     </ul>
   )
 }
